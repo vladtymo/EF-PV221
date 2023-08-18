@@ -8,6 +8,7 @@
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime? Birthdate { get; set; }
+        public decimal Salary { get; set; }
 
         // ForeignKey: RelatedEntityName+Key
         public int PositionId { get; set; } // optional
@@ -18,5 +19,8 @@
 
         // Relation Type: One to Many (0/1...*)
         public ICollection<Order> Orders { get; set; }
+
+        // Relation Type: One to One (1...1)
+        public Resume? Resume { get; set; }
     }
 }

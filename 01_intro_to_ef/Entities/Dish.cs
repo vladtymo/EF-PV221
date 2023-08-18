@@ -7,6 +7,7 @@
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public float Weight { get; set; }
+        public int? Rating { get; set; }
 
         // Relation Type: Many to Many (*...*)
         public ICollection<Order> Orders { get; set; }
