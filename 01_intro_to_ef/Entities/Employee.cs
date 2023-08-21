@@ -1,4 +1,6 @@
-﻿namespace _01_intro_to_ef
+﻿using Castle.Components.DictionaryAdapter;
+
+namespace _01_intro_to_ef
 {
     // Entity Classes (Column Definitions in SQL)
     public class Employee
@@ -15,12 +17,12 @@
 
         // ----- Navigation Properties (references)
         // Relation Type: One to Many (1...*)
-        public Position Position { get; set; }
+        public virtual Position Position { get; set; }
 
         // Relation Type: One to Many (0/1...*)
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
 
         // Relation Type: One to One (1...1)
-        public Resume? Resume { get; set; }
+        public virtual Resume? Resume { get; set; }
     }
 }

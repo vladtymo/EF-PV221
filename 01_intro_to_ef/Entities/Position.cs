@@ -6,6 +6,6 @@
         public string Name { get; set; }
 
         // ----- Navigation Properties
-        public ICollection<Employee> Customers { get; set; }
+        public virtual ICollection<Employee> Customers { get; set; }
     }
 }

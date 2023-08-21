@@ -16,6 +16,6 @@ namespace _01_intro_to_ef
         public string? Description { get; set; }
 
         public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

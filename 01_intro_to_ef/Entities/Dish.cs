@@ -10,6 +10,6 @@
         public int? Rating { get; set; }
 
         // Relation Type: Many to Many (*...*)
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -7,7 +7,7 @@
         public int? WaiterId { get; set; }
 
         // ----- Navigation Properties
-        public Employee? Waiter { get; set; }
-        public ICollection<Dish> Dishes { get; set; }
+        public virtual Employee? Waiter { get; set; }
+        public virtual ICollection<Dish> Dishes { get; set; } = new HashSet<Dish>();
     }
 }

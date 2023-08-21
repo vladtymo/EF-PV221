@@ -18,7 +18,9 @@ namespace _01_intro_to_ef
         {
             base.OnConfiguring(optionsBuilder);
 
-            string conn = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=NullCafeDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            //optionsBuilder.UseLazyLoadingProxies();
+
+            string conn = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=NullCafeDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;MultipleActiveResultSets=true";
             optionsBuilder.UseSqlServer(conn);
         }
 
