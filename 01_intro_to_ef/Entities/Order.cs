@@ -1,8 +1,11 @@
-﻿namespace _01_intro_to_ef
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace _01_intro_to_ef
 {
     public class Order
     {
-        public int Id { get; set; }
+        [Key] // set primary key
+        public int Number { get; set; }
         public DateTime Date { get; set; }
         public int? WaiterId { get; set; }
 

@@ -26,7 +26,12 @@ namespace _01_intro_to_ef
             //{
             //    Console.WriteLine($"Dish {i.Title} - {i.Price}$ {i.Weight}g {i.Rating}");
             //}
+            
+            LoadingTypes(db);
+        }
 
+        static void LoadingTypes(RestaurantDbContext db)
+        {
             // ----------------- Loading Types
             // 1 - eager loading
             var emps = db.Employees.Include(x => x.Position)
