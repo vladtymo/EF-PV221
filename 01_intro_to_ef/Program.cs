@@ -50,7 +50,7 @@ namespace _01_intro_to_ef
 
             foreach (var i in emp.Orders)
             {
-                Console.WriteLine("Order: " + i.Id + " " + i.Date);
+                Console.WriteLine("Order: " + i.Number + " " + i.Date);
                 foreach (var d in i.Dishes)
                 {
                     Console.WriteLine("\t" + d.Title);

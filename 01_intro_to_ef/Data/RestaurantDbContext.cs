@@ -43,7 +43,7 @@ namespace _01_intro_to_ef
                 {
                     Id = 1,
                     Name = "Andrii",
-                    PositionId = 2,
+                    PositionNumber = 2,
                     Surname = "Povar",
                     Birthdate = new DateTime(1988, 4, 10),
                     Salary = 1200
