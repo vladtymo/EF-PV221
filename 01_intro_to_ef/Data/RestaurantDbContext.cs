@@ -1,4 +1,5 @@
-﻿using _01_intro_to_ef.Data.Configurations;
+﻿using _01_intro_to_ef.Data;
+using _01_intro_to_ef.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace _01_intro_to_ef
@@ -36,40 +37,7 @@ namespace _01_intro_to_ef
             modelBuilder.Entity<Order>().HasMany(x => x.Dishes).WithMany(x => x.Orders);
 
             // data initialization
-            #region Seed Data
-            modelBuilder.Entity<Position>().HasData(new[]
-            {
-                new Position() { Id = 1, Name = "Waiter" },
-                new Position() { Id = 2, Name = "Chef" },
-                new Position() { Id = 3, Name = "Administrator" },
-                new Position() { Id = 4, Name = "Barman" }
-            });
-
-            modelBuilder.Entity<Employee>().HasData(new Employee[]
-            {
-                new()
-                {
-                    Id = 1,
-                    Name = "Andrii",
-                    PositionNumber = 2,
-                    Surname = "Povar",
-                    Birthdate = new DateTime(1988, 4, 10),
-                    Salary = 1200
-                }
-            });
-
-            modelBuilder.Entity<Resume>().HasData(new Resume[]
-            {
-                new()
-                {
-                     Id = 1,
-                     Certified = true,
-                     EmployeeId = 1,
-                     Summary = "I am a great cook!",
-                     Experience = 2
-                }
-            });
-            #endregion
+            DbExtensions.SeedData(modelBuilder);
         }
 
         // Object Collections (Tables in SQL)
