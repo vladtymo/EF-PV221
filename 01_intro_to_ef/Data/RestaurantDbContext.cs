@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _01_intro_to_ef.Data.Configurations;
+using Microsoft.EntityFrameworkCore;
 
 namespace _01_intro_to_ef
 {
@@ -28,7 +29,14 @@ namespace _01_intro_to_ef
         {
             base.OnModelCreating(modelBuilder);
 
+            // ---------------- FluentAPI Configurations
+            modelBuilder.ApplyConfiguration(new EmployeeConfigs());
+
+            modelBuilder.Entity<Order>().HasKey(x => x.Number);
+            modelBuilder.Entity<Order>().HasMany(x => x.Dishes).WithMany(x => x.Orders);
+
             // data initialization
+            #region Seed Data
             modelBuilder.Entity<Position>().HasData(new[]
             {
                 new Position() { Id = 1, Name = "Waiter" },
@@ -61,6 +69,7 @@ namespace _01_intro_to_ef
                      Experience = 2
                 }
             });
+            #endregion
         }
 
         // Object Collections (Tables in SQL)
