@@ -48,7 +48,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Dishes");
+                    b.ToTable("Dishes", (string)null);
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Employee", b =>
@@ -83,7 +83,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasIndex("PositionNumber");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
 
                     b.HasData(
                         new
@@ -115,7 +115,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasIndex("WaiterId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Position", b =>
@@ -132,7 +132,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Positions");
+                    b.ToTable("Positions", (string)null);
 
                     b.HasData(
                         new
@@ -186,7 +186,7 @@ namespace _01_intro_to_ef.Migrations
                     b.HasIndex("EmployeeId")
                         .IsUnique();
 
-                    b.ToTable("Resumes");
+                    b.ToTable("Resumes", (string)null);
 
                     b.HasData(
                         new
@@ -211,7 +211,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasIndex("OrdersNumber");
 
-                    b.ToTable("DishOrder");
+                    b.ToTable("DishOrder", (string)null);
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Employee", b =>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _01_intro_to_ef.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace _01_intro_to_ef
 {

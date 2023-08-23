@@ -9,7 +9,7 @@ namespace _01_intro_to_ef.Data
 {
     public static class DbExtensions
     {
-        public static void SeedData(ModelBuilder modelBuilder)
+        public static void SeedData(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Position>().HasData(new[]
             {

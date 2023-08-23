@@ -37,7 +37,8 @@ namespace _01_intro_to_ef
             modelBuilder.Entity<Order>().HasMany(x => x.Dishes).WithMany(x => x.Orders);
 
             // data initialization
-            DbExtensions.SeedData(modelBuilder);
+            //DbExtensions.SeedData(modelBuilder);
+            modelBuilder.SeedData();
         }
 
         // Object Collections (Tables in SQL)
