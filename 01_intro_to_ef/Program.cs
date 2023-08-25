@@ -30,6 +30,14 @@ namespace _01_intro_to_ef
             //}
             
             LoadingTypes(db);
+
+            // ----------------- Entity State
+            var newE = new Employee() { Name = "Luda"  /* .. */}; // detached
+
+            //db.Employees.Add(newE);
+            //db.Entry(newE).State = EntityState.Added;
+
+            //db.SaveChanges(); // INSERT
         }
 
         static void LoadingTypes(RestaurantDbContext db)

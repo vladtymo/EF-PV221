@@ -1,4 +1,6 @@
 ﻿using data_access;
+using data_access.Interfaces;
+using data_access.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,31 +24,27 @@ namespace _02_wpf_client
     /// </summary>
     public partial class MainWindow : Window
     {
-        private RestaurantDbContext db = null;
+        //private RestaurantDbContext db = null;
+        private IRepository<Employee> repo = null;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            db = new RestaurantDbContext();
+            repo = new Repository<Employee>(new RestaurantDbContext());
 
-            var e = db.Employees.First();
+            var e = repo.GetByID(1);
 
-            var newE = new Employee() { Name = "Luda"  /* .. */}; // detached
+            var result = repo.Get(x => x.Salary > 1000, x => x.OrderBy(e => e.Salary), nameof(Employee.Position));
 
-            //db.Employees.Add(newE);
-            db.Entry(newE).State = EntityState.Added;
-
-            db.SaveChanges(); // INSERT
-
-            tableView.ItemsSource = db.Employees.Include(x => x.Position).Select(x => new
+            tableView.ItemsSource = repo.Get(includeProperties: "Position").Select(x => new
             {
                 x.Id,
                 x.FullName,
                 x.Salary,
                 x.Birthdate,
                 PositionName = x.Position.Name
-            }).ToList();
+            });
         }
     }
 }
