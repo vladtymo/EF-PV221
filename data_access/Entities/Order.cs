@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using data_access.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace data_access
 {
-    public class Order
+    public class Order : IEntity
     {
         public int Number { get; set; }
         public DateTime Date { get; set; }

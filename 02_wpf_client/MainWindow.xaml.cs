@@ -30,6 +30,15 @@ namespace _02_wpf_client
 
             db = new RestaurantDbContext();
 
+            var e = db.Employees.First();
+
+            var newE = new Employee() { Name = "Luda"  /* .. */}; // detached
+
+            //db.Employees.Add(newE);
+            db.Entry(newE).State = EntityState.Added;
+
+            db.SaveChanges(); // INSERT
+
             tableView.ItemsSource = db.Employees.Include(x => x.Position).Select(x => new
             {
                 x.Id,

@@ -1,6 +1,8 @@
-﻿namespace data_access
+﻿using data_access.Interfaces;
+
+namespace data_access
 {
-    public class Position
+    public class Position : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

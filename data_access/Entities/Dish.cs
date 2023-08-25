@@ -1,6 +1,8 @@
-﻿namespace data_access
+﻿using data_access.Interfaces;
+
+namespace data_access
 {
-    public class Dish
+    public class Dish : IEntity
     {
         public int Id { get; set; }
         public string Title { get; set; }

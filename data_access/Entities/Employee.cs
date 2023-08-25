@@ -1,11 +1,12 @@
 ﻿using Castle.Components.DictionaryAdapter;
+using data_access.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace data_access
 {
     // Entity Classes (Column Definitions in SQL)
-    public class Employee
+    public class Employee : IEntity
     {
         // PrimaryKey naming: Id id ID EntityName+Id (CustomerId)
         public int Id { get; set; }
