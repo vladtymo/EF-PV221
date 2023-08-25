@@ -1,4 +1,4 @@
-﻿namespace _01_intro_to_ef
+﻿namespace data_access
 {
     public class Dish
     {

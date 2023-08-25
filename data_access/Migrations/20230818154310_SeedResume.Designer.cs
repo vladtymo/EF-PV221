@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using _01_intro_to_ef;
+using data_access;
 
 #nullable disable
 
-namespace _01_intro_to_ef.Migrations
+namespace data_access.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20230823154837_UseFluentAPI")]
-    partial class UseFluentAPI
+    [Migration("20230818154310_SeedResume")]
+    partial class SeedResume
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,15 +62,13 @@ namespace _01_intro_to_ef.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("Birthdate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DateOfBirth");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PositionNumber")
+                    b.Property<int>("PositionId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Salary")
@@ -80,10 +78,9 @@ namespace _01_intro_to_ef.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id")
-                        .HasName("Workers");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PositionNumber");
+                    b.HasIndex("PositionId");
 
                     b.ToTable("Employees");
 
@@ -93,7 +90,7 @@ namespace _01_intro_to_ef.Migrations
                             Id = 1,
                             Birthdate = new DateTime(1988, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Andrii",
-                            PositionNumber = 2,
+                            PositionId = 2,
                             Salary = 1200m,
                             Surname = "Povar"
                         });
@@ -101,11 +98,11 @@ namespace _01_intro_to_ef.Migrations
 
             modelBuilder.Entity("_01_intro_to_ef.Order", b =>
                 {
-                    b.Property<int>("Number")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Number"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -113,7 +110,7 @@ namespace _01_intro_to_ef.Migrations
                     b.Property<int?>("WaiterId")
                         .HasColumnType("int");
 
-                    b.HasKey("Number");
+                    b.HasKey("Id");
 
                     b.HasIndex("WaiterId");
 
@@ -206,12 +203,12 @@ namespace _01_intro_to_ef.Migrations
                     b.Property<int>("DishesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrdersNumber")
+                    b.Property<int>("OrdersId")
                         .HasColumnType("int");
 
-                    b.HasKey("DishesId", "OrdersNumber");
+                    b.HasKey("DishesId", "OrdersId");
 
-                    b.HasIndex("OrdersNumber");
+                    b.HasIndex("OrdersId");
 
                     b.ToTable("DishOrder");
                 });
@@ -220,8 +217,8 @@ namespace _01_intro_to_ef.Migrations
                 {
                     b.HasOne("_01_intro_to_ef.Position", "Position")
                         .WithMany("Customers")
-                        .HasForeignKey("PositionNumber")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Position");
@@ -257,7 +254,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasOne("_01_intro_to_ef.Order", null)
                         .WithMany()
-                        .HasForeignKey("OrdersNumber")
+                        .HasForeignKey("OrdersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

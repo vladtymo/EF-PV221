@@ -1,8 +1,8 @@
-﻿using _01_intro_to_ef.Data;
-using _01_intro_to_ef.Data.Configurations;
+﻿using data_access.Data;
+using data_access.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace _01_intro_to_ef
+namespace data_access
 {
     public class RestaurantDbContext : DbContext
     {

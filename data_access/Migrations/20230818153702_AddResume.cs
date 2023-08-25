@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace _01_intro_to_ef.Migrations
+namespace data_access.Migrations
 {
     public partial class AddResume : Migration
     {

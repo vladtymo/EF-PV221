@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using _01_intro_to_ef;
+using data_access;
 
 #nullable disable
 
-namespace _01_intro_to_ef.Migrations
+namespace data_access.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20230818154310_SeedResume")]
-    partial class SeedResume
+    [Migration("20230818152937_AddRating")]
+    partial class AddRating
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,9 +71,6 @@ namespace _01_intro_to_ef.Migrations
                     b.Property<int>("PositionId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -83,17 +80,6 @@ namespace _01_intro_to_ef.Migrations
                     b.HasIndex("PositionId");
 
                     b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Birthdate = new DateTime(1988, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Andrii",
-                            PositionId = 2,
-                            Salary = 1200m,
-                            Surname = "Povar"
-                        });
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Order", b =>
@@ -156,48 +142,6 @@ namespace _01_intro_to_ef.Migrations
                         });
                 });
 
-            modelBuilder.Entity("_01_intro_to_ef.Resume", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Certified")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Experience")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
-
-                    b.ToTable("Resumes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Certified = true,
-                            EmployeeId = 1,
-                            Experience = 2,
-                            Summary = "I am a great cook!"
-                        });
-                });
-
             modelBuilder.Entity("DishOrder", b =>
                 {
                     b.Property<int>("DishesId")
@@ -233,17 +177,6 @@ namespace _01_intro_to_ef.Migrations
                     b.Navigation("Waiter");
                 });
 
-            modelBuilder.Entity("_01_intro_to_ef.Resume", b =>
-                {
-                    b.HasOne("_01_intro_to_ef.Employee", "Employee")
-                        .WithOne("Resume")
-                        .HasForeignKey("_01_intro_to_ef.Resume", "EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("DishOrder", b =>
                 {
                     b.HasOne("_01_intro_to_ef.Dish", null)
@@ -262,8 +195,6 @@ namespace _01_intro_to_ef.Migrations
             modelBuilder.Entity("_01_intro_to_ef.Employee", b =>
                 {
                     b.Navigation("Orders");
-
-                    b.Navigation("Resume");
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Position", b =>

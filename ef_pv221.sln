@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_intro_to_ef", "01_intro_to_ef\01_intro_to_ef.csproj", "{2DC5D721-A1E9-4B66-A309-E215A19D7066}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01_intro_to_ef", "01_intro_to_ef\01_intro_to_ef.csproj", "{2DC5D721-A1E9-4B66-A309-E215A19D7066}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data_access", "data_access\data_access.csproj", "{D57C289F-3C30-4DBC-8924-1C0BDC05AE6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_wpf_client", "02_wpf_client\02_wpf_client.csproj", "{D170EFAB-B4FB-4CA3-82B8-C8756BEB761D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{2DC5D721-A1E9-4B66-A309-E215A19D7066}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DC5D721-A1E9-4B66-A309-E215A19D7066}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DC5D721-A1E9-4B66-A309-E215A19D7066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D57C289F-3C30-4DBC-8924-1C0BDC05AE6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57C289F-3C30-4DBC-8924-1C0BDC05AE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57C289F-3C30-4DBC-8924-1C0BDC05AE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57C289F-3C30-4DBC-8924-1C0BDC05AE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D170EFAB-B4FB-4CA3-82B8-C8756BEB761D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D170EFAB-B4FB-4CA3-82B8-C8756BEB761D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D170EFAB-B4FB-4CA3-82B8-C8756BEB761D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D170EFAB-B4FB-4CA3-82B8-C8756BEB761D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

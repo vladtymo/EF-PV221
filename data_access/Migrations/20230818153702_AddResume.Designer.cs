@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using _01_intro_to_ef;
+using data_access;
 
 #nullable disable
 
-namespace _01_intro_to_ef.Migrations
+namespace data_access.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
     [Migration("20230818153702_AddResume")]

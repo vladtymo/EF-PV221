@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using _01_intro_to_ef;
+using data_access;
 
 #nullable disable
 
-namespace _01_intro_to_ef.Migrations
+namespace data_access.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230818153113_AddSalary")]
+    partial class AddSalary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +50,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Dishes", (string)null);
+                    b.ToTable("Dishes");
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Employee", b =>
@@ -60,15 +62,13 @@ namespace _01_intro_to_ef.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("Birthdate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DateOfBirth");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PositionNumber")
+                    b.Property<int>("PositionId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Salary")
@@ -78,32 +78,20 @@ namespace _01_intro_to_ef.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id")
-                        .HasName("Workers");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PositionNumber");
+                    b.HasIndex("PositionId");
 
-                    b.ToTable("Employees", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Birthdate = new DateTime(1988, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Andrii",
-                            PositionNumber = 2,
-                            Salary = 1200m,
-                            Surname = "Povar"
-                        });
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Order", b =>
                 {
-                    b.Property<int>("Number")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Number"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -111,11 +99,11 @@ namespace _01_intro_to_ef.Migrations
                     b.Property<int?>("WaiterId")
                         .HasColumnType("int");
 
-                    b.HasKey("Number");
+                    b.HasKey("Id");
 
                     b.HasIndex("WaiterId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Position", b =>
@@ -132,7 +120,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Positions", (string)null);
+                    b.ToTable("Positions");
 
                     b.HasData(
                         new
@@ -157,69 +145,27 @@ namespace _01_intro_to_ef.Migrations
                         });
                 });
 
-            modelBuilder.Entity("_01_intro_to_ef.Resume", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Certified")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Experience")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
-
-                    b.ToTable("Resumes", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Certified = true,
-                            EmployeeId = 1,
-                            Experience = 2,
-                            Summary = "I am a great cook!"
-                        });
-                });
-
             modelBuilder.Entity("DishOrder", b =>
                 {
                     b.Property<int>("DishesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrdersNumber")
+                    b.Property<int>("OrdersId")
                         .HasColumnType("int");
 
-                    b.HasKey("DishesId", "OrdersNumber");
+                    b.HasKey("DishesId", "OrdersId");
 
-                    b.HasIndex("OrdersNumber");
+                    b.HasIndex("OrdersId");
 
-                    b.ToTable("DishOrder", (string)null);
+                    b.ToTable("DishOrder");
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Employee", b =>
                 {
                     b.HasOne("_01_intro_to_ef.Position", "Position")
                         .WithMany("Customers")
-                        .HasForeignKey("PositionNumber")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Position");
@@ -234,17 +180,6 @@ namespace _01_intro_to_ef.Migrations
                     b.Navigation("Waiter");
                 });
 
-            modelBuilder.Entity("_01_intro_to_ef.Resume", b =>
-                {
-                    b.HasOne("_01_intro_to_ef.Employee", "Employee")
-                        .WithOne("Resume")
-                        .HasForeignKey("_01_intro_to_ef.Resume", "EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("DishOrder", b =>
                 {
                     b.HasOne("_01_intro_to_ef.Dish", null)
@@ -255,7 +190,7 @@ namespace _01_intro_to_ef.Migrations
 
                     b.HasOne("_01_intro_to_ef.Order", null)
                         .WithMany()
-                        .HasForeignKey("OrdersNumber")
+                        .HasForeignKey("OrdersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -263,8 +198,6 @@ namespace _01_intro_to_ef.Migrations
             modelBuilder.Entity("_01_intro_to_ef.Employee", b =>
                 {
                     b.Navigation("Orders");
-
-                    b.Navigation("Resume");
                 });
 
             modelBuilder.Entity("_01_intro_to_ef.Position", b =>

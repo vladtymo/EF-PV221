@@ -7,7 +7,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _01_intro_to_ef.Data.Configurations
+namespace data_access.Data.Configurations
 {
     public class EmployeeConfigs : IEntityTypeConfiguration<Employee>
     {

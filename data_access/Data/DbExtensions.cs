@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _01_intro_to_ef.Data
+namespace data_access.Data
 {
     public static class DbExtensions
     {
