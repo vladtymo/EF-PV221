@@ -24,20 +24,31 @@ namespace _02_wpf_client
     /// </summary>
     public partial class MainWindow : Window
     {
+        // 1 - using DbContext
         //private RestaurantDbContext db = null;
-        private IRepository<Employee> repo = null;
+
+        // 2 - using Repositories
+        //private IRepository<Employee> empRepo = null;
+        //private IRepository<Position> posRepo = null;
+        // ... others repositories
+
+        // 3 - using Unit of Work
+        private IUoW uow = new UnitOfWork();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            repo = new Repository<Employee>(new RestaurantDbContext());
+            //var ctx = new RestaurantDbContext();
+            //empRepo = new Repository<Employee>(ctx);
+            //posRepo = new Repository<Position>(ctx);
 
-            var e = repo.GetByID(1);
+            var p = uow.EmployeeRepo.GetByID(1);
+            var e = uow.PositionRepo.GetByID(1);
 
-            var result = repo.Get(x => x.Salary > 1000, x => x.OrderBy(e => e.Salary), nameof(Employee.Position));
+            var result = uow.EmployeeRepo.Get(x => x.Salary > 1000, x => x.OrderBy(e => e.Salary), nameof(Employee.Position));
 
-            tableView.ItemsSource = repo.Get(includeProperties: "Position").Select(x => new
+            tableView.ItemsSource = uow.EmployeeRepo.Get(includeProperties: "Position").Select(x => new
             {
                 x.Id,
                 x.FullName,
@@ -45,6 +56,8 @@ namespace _02_wpf_client
                 x.Birthdate,
                 PositionName = x.Position.Name
             });
+
+            uow.Save();
         }
     }
 }
